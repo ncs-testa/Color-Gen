@@ -247,7 +247,8 @@
 
     <header>
         <h1>🎨 Palette & Design System Generator</h1>
-        <div style="display: flex; gap: 0.5rem;">
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <button class="btn btn-outline hidden" id="replace-img-btn">📷 Upload New Image</button>
             <button class="btn btn-outline" id="eyedropper-btn">🖌️ Eyedropper</button>
             <button class="btn" id="export-card-btn">Export Spec Card</button>
         </div>
@@ -321,11 +322,13 @@
         const imageContainer = document.getElementById('image-container');
         const paletteGrid = document.getElementById('palette-grid');
         const eyedropperCanvas = document.getElementById('eyedropper-canvas');
+        const replaceImgBtn = document.getElementById('replace-img-btn');
         
         let extractedColors = [];
         let selectedColorIndex = 0;
 
         dropZone.addEventListener('click', () => fileInput.click());
+        replaceImgBtn.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', handleFile);
 
         dropZone.addEventListener('dragover', (e) => {
@@ -355,6 +358,7 @@
                 displayImg.onload = () => {
                     dropZone.classList.add('hidden');
                     imageContainer.style.display = 'block';
+                    replaceImgBtn.classList.remove('hidden');
                     extractPalette();
                 };
             };
